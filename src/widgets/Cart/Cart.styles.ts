@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const CartWrapper = styled.div`
+interface CartWrapperProps {
+  showCart?: boolean;
+}
+
+export const CartWrapper = styled.div<CartWrapperProps>`
   position: absolute;
   top: 0;
   right: 0;
@@ -10,7 +14,7 @@ export const CartWrapper = styled.div`
   border-left: 1px solid #646464;
   padding: 20px 25px;
   transition: 0.3s;
-  transform: translateX(110%);
+  transform: ${(props) => (props.showCart ? 'translateX(0)' : 'translateX(110%)')};
 `;
 
 export const CartTop = styled.div`

@@ -44,12 +44,13 @@ export const UserControl = styled.div`
   justify-content: center;
   align-items: center;
 
-  div {
+  div,
+  a {
     width: 30px;
     height: 30px;
+  }
 
-    &:first-child {
-      margin-right: 20px;
-    }
+  a:first-child {
+    margin-right: 20px;
   }
 `;

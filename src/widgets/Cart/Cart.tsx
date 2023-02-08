@@ -1,19 +1,27 @@
 import CartProductItem from '@widgets/Cart/components/CartProductItem/CartProductItem';
 import { CartWrapper, CartTop } from '@widgets/Cart/Cart.styles';
+import { useContext } from 'react';
+import { CartContext } from '@shared/context/cart-context/cart-context';
 
-const Cart = ({ showCart, toggleCart }: { showCart: boolean; toggleCart: CallableFunction }) => {
+const Cart = () => {
+  const { state, dispatch } = useContext(CartContext);
+
   const onCloseHandle = () => {
-    toggleCart(false);
+    dispatch({ type: 'TOGGLE_CART', payload: false });
   };
 
+  console.log(state);
+
   return (
-    <CartWrapper>
+    <CartWrapper showCart={state.showCart}>
       <CartTop>
         <div>Your cart</div>
         <div onClick={onCloseHandle}>Close</div>
       </CartTop>
       <div>
-        <CartProductItem />
+        {state.selectedProducts.map(() => {
+          return <CartProductItem />;
+        })}
       </div>
     </CartWrapper>
   );

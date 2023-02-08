@@ -5,11 +5,13 @@ import UserSvg from '@shared/icons/UserSvg';
 import navigation from '@widgets/Header/navigation';
 import { UserContext } from '@shared/context/user-context/user-context';
 import { userSignOut } from '@widgets/Header/service/signout-service';
+import { CartContext } from '@shared/context/cart-context/cart-context';
 
 import { HeaderWrapper, Logo, Navigation, NavButton, UserControl } from '@widgets/Header/Header.styles';
 
-const Header = ({ toggleCart }: { toggleCart: CallableFunction }) => {
+const Header = () => {
   const { currentUser } = useContext(UserContext);
+  const { dispatch } = useContext(CartContext);
 
   const onSignOut = async () => {
     try {
@@ -23,7 +25,7 @@ const Header = ({ toggleCart }: { toggleCart: CallableFunction }) => {
   };
 
   const onCartHandle = () => {
-    toggleCart(true);
+    dispatch({ type: 'TOGGLE_CART', payload: true });
   };
 
   return (

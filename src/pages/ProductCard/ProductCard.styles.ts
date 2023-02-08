@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Button } from 'antd';
 import { COLORS } from '@shared/styles/variables-styles';
 
 export const ProductCardWrapper = styled.div`
@@ -28,7 +27,7 @@ export const Description = styled.div`
     text-transform: uppercase;
   }
 
-  span {
+  > span {
     margin-bottom: 20px;
     color: ${COLORS['grey-light']};
     font-size: 25px;
