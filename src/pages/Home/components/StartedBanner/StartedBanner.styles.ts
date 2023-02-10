@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '@shared/styles/variables-styles';
+import { COLORS } from '@shared/assets/styles/variables-styles';
 
 export const StartedBannerWrapper = styled.div`
   position: relative;

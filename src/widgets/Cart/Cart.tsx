@@ -1,26 +1,26 @@
 import CartProductItem from '@widgets/Cart/components/CartProductItem/CartProductItem';
 import { CartWrapper, CartTop } from '@widgets/Cart/Cart.styles';
-import { useContext } from 'react';
-import { CartContext } from '@shared/context/cart-context/cart-context';
+import { toggleCart } from '@widgets/Cart/reducer/cart-reducer';
+import { useAppSelector, useAppDispatch } from '@shared/hooks/dispatch-selector';
 
 const Cart = () => {
-  const { state, dispatch } = useContext(CartContext);
+  const showCart = useAppSelector((state) => state.cart.showCart);
+  const selectedProducts = useAppSelector((state) => state.cart.selectedProducts);
+  const dispatch = useAppDispatch();
 
   const onCloseHandle = () => {
-    dispatch({ type: 'TOGGLE_CART', payload: false });
+    dispatch(toggleCart(false));
   };
 
-  console.log(state);
-
   return (
-    <CartWrapper showCart={state.showCart}>
+    <CartWrapper showCart={showCart}>
       <CartTop>
         <div>Your cart</div>
         <div onClick={onCloseHandle}>Close</div>
       </CartTop>
       <div>
-        {state.selectedProducts.map(() => {
-          return <CartProductItem />;
+        {selectedProducts.map((product) => {
+          return <CartProductItem id={product.id} />;
         })}
       </div>
     </CartWrapper>

@@ -1,4 +1,4 @@
-import ArrowLongSvg from '@shared/icons/ArrowLongSvg';
+import ArrowLongSvg from '@shared/assets/icons/ArrowLongSvg';
 import { LinkButtonWrapper } from '@shared/ui/LinkButton/LinkButton.styles';
 
 interface LinkButtonType {

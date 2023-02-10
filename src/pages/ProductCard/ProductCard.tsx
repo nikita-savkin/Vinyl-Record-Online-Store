@@ -2,10 +2,11 @@ import { Button } from 'antd';
 import { ProductCardWrapper, Cover, Description, ButtonsWrapper } from '@pages/ProductCard/ProductCard.styles';
 import { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CartContext } from '@shared/context/cart-context/cart-context';
 import { ProductsContext } from '@shared/context/products-context/products-context';
 import { Product } from '@shared/context/products-context/types/types';
 import { getStorageFileUrl } from '@shared/firebase/utils/get-storage-file-url';
+import { useAppDispatch } from '@shared/hooks/dispatch-selector';
+import { addProduct } from '@widgets/Cart/reducer/cart-reducer';
 
 const productDefault = {
   id: null,
@@ -20,8 +21,8 @@ const productDefault = {
 
 const ProductCard = () => {
   const params = useParams();
-  const { dispatch } = useContext(CartContext);
   const { products } = useContext(ProductsContext);
+  const dispatch = useAppDispatch();
 
   const [product, setProduct] = useState<Product>(productDefault);
   const [imageUrl, setImageUrl] = useState('');
@@ -49,7 +50,7 @@ const ProductCard = () => {
   }, [products]);
 
   const addProductToCart = () => {
-    dispatch({ type: 'ADD_PRODUCT', payload: product });
+    dispatch(addProduct(product));
   };
 
   return (

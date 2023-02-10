@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { UserProvider } from '@shared/context/user-context/user-context';
 import { ProductsProvider } from '@shared/context/products-context/products-context';
-import { CartProvider } from '@shared/context/cart-context/cart-context';
 import router from '@app/router';
+import store from '@shared/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -12,9 +13,9 @@ root.render(
   <React.StrictMode>
     <UserProvider>
       <ProductsProvider>
-        <CartProvider>
+        <Provider store={store}>
           <RouterProvider router={router} />
-        </CartProvider>
+        </Provider>
       </ProductsProvider>
     </UserProvider>
   </React.StrictMode>,

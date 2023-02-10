@@ -4,8 +4,16 @@ import {
   PoductImage,
   DescrTop,
 } from '@widgets/Cart/components/CartProductItem/CartProductItem.styles';
+import { useAppDispatch } from '@shared/hooks/dispatch-selector';
+import { removeProduct } from '@widgets/Cart/reducer/cart-reducer';
 
-const CartProductItem = () => {
+const CartProductItem = ({ id }: { id: number | null }) => {
+  const dispatch = useAppDispatch();
+
+  const removeHandle = () => {
+    dispatch(removeProduct(id));
+  };
+
   return (
     <CartProductItemWrapper>
       <PoductImage>
@@ -18,7 +26,7 @@ const CartProductItem = () => {
             <br />
             <span>label</span>
           </div>
-          <div>Remove</div>
+          <div onClick={removeHandle}>Remove</div>
         </DescrTop>
         <div>price</div>
       </Description>
