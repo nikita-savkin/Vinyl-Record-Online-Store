@@ -1,12 +1,10 @@
-import { useContext } from 'react';
 import ProductsFilter from '@pages/Products/components/ProductsFilter/ProductsFilter';
-import { ProductsContext } from '@shared/context/products-context/products-context';
 import ProductPreview from '@shared/components/ProductPreview/ProductPreview';
-
+import { useAppSelector } from '@shared/hooks/dispatch-selector';
 import { ProductsPageWrapper, ProductsFilterWrapper, Layout } from '@pages/Products/ProductsPage.styles';
 
 const ProductsPage = () => {
-  const { products } = useContext(ProductsContext);
+  const products = useAppSelector((state) => state.products.allProducts);
 
   return (
     <ProductsPageWrapper>

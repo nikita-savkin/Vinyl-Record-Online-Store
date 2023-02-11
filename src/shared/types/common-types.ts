@@ -1,4 +1,4 @@
-export interface Product {
+export interface ProductFull {
   id: number | null;
   author: string;
   albumName: string;

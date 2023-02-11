@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { Product } from '@shared/context/products-context/types/types';
+import { ProductFull } from '@shared/types/common-types';
 
 interface CartState {
   showCart: boolean;
-  selectedProducts: Product[];
+  selectedProducts: ProductFull[];
 }
 
 const initialState: CartState = {
@@ -18,7 +18,7 @@ export const cartSlice = createSlice({
     toggleCart: (state, action: PayloadAction<boolean>) => {
       state.showCart = action.payload;
     },
-    addProduct: (state, action: PayloadAction<Product>) => {
+    addProduct: (state, action: PayloadAction<ProductFull>) => {
       state.selectedProducts.push(action.payload);
     },
     removeProduct: (state, action: PayloadAction<number | null>) => {

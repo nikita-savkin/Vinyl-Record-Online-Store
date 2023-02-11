@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getStorageFileUrl } from '@shared/firebase/utils/get-storage-file-url';
-import type { Product } from '@shared/context/products-context/types/types';
+import { ProductFull } from '@shared/types/common-types';
 
 import {
   ProductPreviewWrapper,
@@ -11,7 +11,7 @@ import {
   ProductPrice,
 } from './ProductPreview.styles';
 
-const ProductPreview = ({ id, author, albumName, price, storageImgUrl }: Product) => {
+const ProductPreview = ({ id, author, albumName, price, storageImgUrl }: ProductFull) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {

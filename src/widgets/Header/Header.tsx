@@ -1,19 +1,16 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import ShoppingCartSvg from '@shared/assets/icons/ShoppingCartSvg';
 import UserSvg from '@shared/assets/icons/UserSvg';
 import navigation from '@widgets/Header/navigation';
-import { UserContext } from '@shared/context/user-context/user-context';
 import { userSignOut } from '@widgets/Header/service/signout-service';
 import { toggleCart } from '@widgets/Cart/reducer/cart-reducer';
 
 import { HeaderWrapper, Logo, Navigation, NavButton, UserControl } from '@widgets/Header/Header.styles';
-import { useAppDispatch } from '@shared/hooks/dispatch-selector';
+import { useAppDispatch, useAppSelector } from '@shared/hooks/dispatch-selector';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const onSignOut = async () => {
     try {

@@ -1,6 +1,6 @@
 import { collection, writeBatch, doc, getDocs } from '@firebase/firestore';
 import { database } from '@shared/firebase/firebase-init';
-import { Product } from '@shared/context/products-context/types/types';
+import { ProductFull } from '@shared/types/common-types';
 
 export const addProductsToStorage = async (collectionKey: string, documentKey: string, objectsToAdd: unknown[]) => {
   const collectionRef = collection(database, collectionKey);
@@ -14,9 +14,9 @@ export const addProductsToStorage = async (collectionKey: string, documentKey: s
   await batch.commit();
 };
 
-export const fetchProductsFromStorage = async (): Promise<Product[]> => {
+export const fetchProductsFromStorage = async (): Promise<ProductFull[]> => {
   const querySnapshot = await getDocs(collection(database, 'products'));
-  const products: Product[] = [];
+  const products: ProductFull[] = [];
 
   querySnapshot.forEach((x) => {
     const { items } = x.data();
