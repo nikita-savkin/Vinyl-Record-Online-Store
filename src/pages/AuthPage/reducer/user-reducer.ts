@@ -1,50 +1,42 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { User as FirebaseUser } from 'firebase/auth';
 import { authStateChanged } from '@widgets/Header/service/signout-service';
+import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 
 interface User {
-  displayName: string;
-  email: string;
+  displayName: string | null;
+  email: string | null;
 }
 
-interface userState {
-  currentUser: User | null;
-}
+export const userApi = createApi({
+  reducerPath: 'userApi',
+  baseQuery: fakeBaseQuery(),
+  endpoints: (build) => ({
+    fetchUser: build.query<User | null, void>({
+      async queryFn(): Promise<{ data: User | null }> {
+        const currentUser = await new Promise<User | null>((resolve: any, reject: any) => {
+          try {
+            authStateChanged((firebaseUser: FirebaseUser | null) => {
+              if (firebaseUser) {
+                const currentUser: User = {
+                  displayName: firebaseUser.displayName,
+                  email: firebaseUser.email,
+                };
 
-const initialState: userState = {
-  currentUser: null,
-};
+                resolve(currentUser);
+              }
 
-export const fetchUser = createAsyncThunk('user/setCurrentUser', async (): Promise<User | null> => {
-  return await new Promise((resolve: any, reject: any) => {
-    try {
-      authStateChanged((firebaseUser: FirebaseUser | null) => {
-        if (firebaseUser) {
-          const currentUser = {
-            displayName: firebaseUser.displayName,
-            email: firebaseUser.email,
-          };
+              resolve(null);
+            });
+          } catch (e) {
+            console.error(e);
+            reject(e);
+          }
+        });
 
-          resolve(currentUser);
-        }
-
-        resolve(null);
-      });
-    } catch (e) {
-      reject(e);
-    }
-  });
+        return { data: currentUser };
+      },
+    }),
+  }),
 });
 
-export const userSlice = createSlice({
-  name: 'user',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.currentUser = action.payload;
-    });
-  },
-});
-
-export default userSlice.reducer;
+export const { useFetchUserQuery } = userApi;
