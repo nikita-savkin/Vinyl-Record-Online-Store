@@ -1,9 +1,9 @@
 import cartReducer from '@widgets/Cart/reducer/cart-reducer';
-import { productsApi } from '@pages/Products/reducer/products-reducer';
 import { userApi } from '@pages/AuthPage/reducer/user-reducer';
+import productsReducer from '@pages/Products/reducer/products-reducer';
 
 const rootReducer = {
-  [productsApi.reducerPath]: productsApi.reducer,
+  products: productsReducer,
   [userApi.reducerPath]: userApi.reducer,
   cart: cartReducer,
 };

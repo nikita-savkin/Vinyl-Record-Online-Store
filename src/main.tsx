@@ -8,9 +8,7 @@ import store from '@app/store/store';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
-  <React.StrictMode>
-    <StoreProvider store={store}>
-      <RouterProvider router={router} />
-    </StoreProvider>
-  </React.StrictMode>,
+  <StoreProvider store={store}>
+    <RouterProvider router={router} />
+  </StoreProvider>,
 );

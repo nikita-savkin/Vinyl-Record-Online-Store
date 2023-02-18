@@ -1,10 +1,37 @@
 import ProductsFilter from '@pages/Products/components/ProductsFilter/ProductsFilter';
 import ProductPreview from '@shared/components/ProductPreview/ProductPreview';
-import { ProductsPageWrapper, ProductsFilterWrapper, Layout } from '@pages/Products/ProductsPage.styles';
-import { useFetchProductsQuery } from '@pages/Products/reducer/products-reducer';
+import { ProductsPageWrapper, ProductsFilterWrapper, ProductsListWrapper } from '@pages/Products/ProductsPage.styles';
+import { useAppSelector, useAppDispatch } from '@shared/hooks/dispatch-selector';
+import { useEffect } from 'react';
+import { getFetchProducts } from '@pages/Products/reducer/products-reducer';
+import { ProductFull } from '@shared/types/common-types';
+import { Button } from 'antd';
 
 const ProductsPage = () => {
-  const { data = [], isLoading } = useFetchProductsQuery();
+  const dispatch = useAppDispatch();
+  const { allProducts, isProductsLoading, fetchErrorMessage, firstVisibleId, lastVisibleId, currentPage, totalPages } =
+    useAppSelector((state) => state.products);
+
+  const ProductsListCondition = (): JSX.Element => {
+    if (fetchErrorMessage) return <div>Error</div>;
+    if (isProductsLoading) return <div>Loading</div>;
+
+    return (
+      <>
+        {allProducts.map((product: ProductFull) => {
+          return <ProductPreview product={product} key={product.uid} />;
+        })}
+      </>
+    );
+  };
+
+  const dispatchProductsPayload = (directionType: 'next' | 'prev' | null) => {
+    dispatch(getFetchProducts({ firstVisibleId, lastVisibleId, directionType }));
+  };
+
+  useEffect(() => {
+    dispatchProductsPayload(null);
+  }, []);
 
   return (
     <ProductsPageWrapper>
@@ -12,22 +39,19 @@ const ProductsPage = () => {
         <h3>Filters</h3>
         <ProductsFilter />
       </ProductsFilterWrapper>
-      <Layout>
-        {!isLoading ? (
-          data.map((product) => (
-            <ProductPreview
-              id={product.id}
-              author={product.author}
-              albumName={product.albumName}
-              price={product.price}
-              storageImgUrl={product.storageImgUrl}
-              key={product.id}
-            />
-          ))
-        ) : (
-          <div>Loading</div>
-        )}
-      </Layout>
+      <div>
+        <ProductsListWrapper>
+          <ProductsListCondition />
+        </ProductsListWrapper>
+        <div>
+          <Button onClick={() => dispatchProductsPayload('prev')} disabled={currentPage === 1}>
+            Prev
+          </Button>
+          <Button onClick={() => dispatchProductsPayload('next')} disabled={currentPage === totalPages}>
+            Next
+          </Button>
+        </div>
+      </div>
     </ProductsPageWrapper>
   );
 };

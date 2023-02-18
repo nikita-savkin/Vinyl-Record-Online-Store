@@ -1,7 +1,7 @@
+import { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { getStorageFileUrl } from '@shared/firebase/utils/get-storage-file-url';
 import { ProductFull } from '@shared/types/common-types';
-
 import {
   ProductPreviewWrapper,
   ImageWrapper,
@@ -11,7 +11,12 @@ import {
   ProductPrice,
 } from './ProductPreview.styles';
 
-const ProductPreview = ({ id, author, albumName, price, storageImgUrl }: ProductFull) => {
+interface ProductPreviewProps {
+  product: ProductFull;
+}
+
+const ProductPreview: FC<ProductPreviewProps> = ({ product }: ProductPreviewProps) => {
+  const { uid, artist, album, price, storageImgUrl } = product;
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -28,13 +33,13 @@ const ProductPreview = ({ id, author, albumName, price, storageImgUrl }: Product
   }, []);
 
   return (
-    <ProductPreviewWrapper to={`/product/${id}`}>
+    <ProductPreviewWrapper to={`/product/${uid}`}>
       <ImageWrapper>
         <ImageTemplate src='/img/vinyl-template.png' alt='vinyl-template' />
         <ImageCover src={imageUrl} alt='vinyl-cover' />
       </ImageWrapper>
       <ProductName>
-        {author} - {albumName}
+        {artist} - {album}
       </ProductName>
       <ProductPrice>&#8364;{price}</ProductPrice>
     </ProductPreviewWrapper>
@@ -42,10 +47,16 @@ const ProductPreview = ({ id, author, albumName, price, storageImgUrl }: Product
 };
 
 ProductPreview.defaultProps = {
-  id: null,
-  author: 'Product Title',
-  price: 0,
-  storageImgUrl: '',
+  product: {
+    uid: '',
+    artist: 'Joy Division',
+    album: 'Unknown Pleasures',
+    label: 'Mofi',
+    storageImgUrl: 'covers/unknown-pleasures.jpeg',
+    price: 50,
+    genre: ['Punk', 'Rock'],
+    year: '60',
+  },
 };
 
 export default ProductPreview;

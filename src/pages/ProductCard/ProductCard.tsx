@@ -3,10 +3,9 @@ import { ProductCardWrapper, Cover, Description, ButtonsWrapper } from '@pages/P
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getStorageFileUrl } from '@shared/firebase/utils/get-storage-file-url';
-import { useAppDispatch } from '@shared/hooks/dispatch-selector';
+import { useAppDispatch, useAppSelector } from '@shared/hooks/dispatch-selector';
 import { addProduct } from '@widgets/Cart/reducer/cart-reducer';
 import { ProductFull } from '@shared/types/common-types';
-import { useFetchProductsQuery } from '@pages/Products/reducer/products-reducer';
 
 const productDefault = {
   id: null,
@@ -22,9 +21,7 @@ const productDefault = {
 const ProductCard = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const { data = [] } = useFetchProductsQuery();
-
-  const products = data;
+  const products: ProductFull[] = useAppSelector((state) => state.products.allProducts);
 
   const [product, setProduct] = useState<ProductFull>(productDefault);
   const [imageUrl, setImageUrl] = useState('');

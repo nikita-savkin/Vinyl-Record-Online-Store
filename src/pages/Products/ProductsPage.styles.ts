@@ -19,12 +19,13 @@ export const ProductsFilterWrapper = styled.div`
   }
 `;
 
-export const Layout = styled.div`
+export const ProductsListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 30px;
+  margin-bottom: 20px;
 
   ${ProductPreviewWrapper} {
     &:nth-child(1) {
