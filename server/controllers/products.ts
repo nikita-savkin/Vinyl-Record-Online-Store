@@ -1,18 +1,26 @@
 import Products from '../models/products.js';
 
 export const getProducts = async (req: any, res: any) => {
-  // const { page } = req.query;
+  const { page, limit, filters } = req.query;
+
+  const parsedFilters = Object.keys(filters ?? {}).map((key) => {
+    return {
+      [key]: {
+        $in: filters[key],
+      },
+    };
+  });
+
+  const filterSettings = {
+    $and: parsedFilters,
+  };
 
   try {
-    // const LIMIT = 8;
-    // const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+    const startIndex = (Number(page) - 1) * limit;
+    const total = await Products.countDocuments(filterSettings);
+    const products = await Products.find(filterSettings).sort({ _id: -1 }).limit(limit).skip(startIndex);
 
-    const result = await Products.find().exec();
-
-    // const total = await Accounts.countDocuments({});
-    // const posts = await Accounts.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
-    //
-    res.json(result);
+    res.json({ products, total });
   } catch (error) {
     res.status(404).json({ message: error });
   }

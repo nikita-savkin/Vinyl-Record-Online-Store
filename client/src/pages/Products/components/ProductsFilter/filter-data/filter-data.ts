@@ -4,8 +4,48 @@ const filterItems = [
     id: 'artist',
     items: [
       {
+        id: 'pink floyd',
         label: 'Pink Floyd',
-        id: 'pink-floyd',
+      },
+      {
+        id: 'the doors',
+        label: 'The Doors',
+      },
+      {
+        id: 'michael jackson',
+        label: 'Michael Jackson',
+      },
+      {
+        id: 'madonna',
+        label: 'Madonna',
+      },
+      {
+        id: 'the beatles',
+        label: 'The Beatles',
+      },
+      {
+        id: 'nirvana',
+        label: 'Nirvana',
+      },
+      {
+        id: 'metallica',
+        label: 'Metallica',
+      },
+      {
+        id: 'king crimson',
+        label: 'King Crimson',
+      },
+      {
+        id: 'fleetwood mac',
+        label: 'Fleetwood Mac',
+      },
+      {
+        id: 'marvin gaye',
+        label: 'Marvin Gaye',
+      },
+      {
+        id: 'creedence clearwater revival',
+        label: 'Creedence Clearwater Revival',
       },
     ],
   },
@@ -14,40 +54,40 @@ const filterItems = [
     id: 'genre',
     items: [
       {
-        label: 'Rock',
         id: 'rock',
+        label: 'Rock',
       },
       {
+        id: 'progressive rock',
         label: 'Progressive Rock',
-        id: 'progressive-rock',
       },
       {
+        id: 'psychedelic rock',
         label: 'Psychedelic Rock',
-        id: 'psychedelic-rock',
       },
       {
-        label: 'Punk',
         id: 'punk',
+        label: 'Punk',
       },
       {
-        label: 'Grunge',
         id: 'grunge',
+        label: 'Grunge',
       },
       {
-        label: 'Metal',
         id: 'metal',
+        label: 'Metal',
       },
       {
-        label: 'Pop',
         id: 'pop',
+        label: 'Pop',
       },
       {
-        label: 'R&B',
         id: 'r&b',
+        label: 'R&B',
       },
       {
-        label: 'Soul',
         id: 'soul',
+        label: 'Soul',
       },
     ],
   },
@@ -56,36 +96,36 @@ const filterItems = [
     id: 'label',
     items: [
       {
+        id: 'diverse vinyl',
         label: 'Diverse Vinyl',
-        id: 'diverse-vinyl',
       },
       {
-        label: 'Mofi',
         id: 'mofi',
+        label: 'Mofi',
       },
       {
+        id: 'analogue productions',
         label: 'Analogue Productions',
-        id: 'analogue-productions',
       },
       {
+        id: 'everest classic records',
         label: 'Everest Classic Records',
-        id: 'everest-classic-records',
       },
       {
+        id: 'gearbox records',
         label: 'Gearbox Records',
-        id: 'gearbox-records',
       },
       {
-        label: 'Thorens',
         id: 'thorens',
+        label: 'Thorens',
       },
       {
+        id: 'impex records',
         label: 'Impex Records',
-        id: 'impex-records',
       },
       {
+        id: 'nimbus west',
         label: 'Nimbus West',
-        id: 'nimbus-west',
       },
     ],
   },
@@ -94,24 +134,24 @@ const filterItems = [
     id: 'year',
     items: [
       {
+        id: '60',
         label: "60's",
-        id: '60-year',
       },
       {
+        id: '70',
         label: "70's",
-        id: '70-year',
       },
       {
+        id: '80',
         label: "80's",
-        id: '80-year',
       },
       {
+        id: '90',
         label: "90's",
-        id: '90-year',
       },
       {
+        id: '00',
         label: "00's",
-        id: '00-year',
       },
     ],
   },

@@ -1,16 +1,16 @@
 const navigation = [
   {
-    id: 1,
+    id: 'products',
     name: 'Music',
     link: '/products',
   },
   {
-    id: 2,
+    id: 'reviews',
     name: 'Reviews',
     link: '/reviews',
   },
   {
-    id: 3,
+    id: 'about',
     name: 'About',
     link: '/about',
   },

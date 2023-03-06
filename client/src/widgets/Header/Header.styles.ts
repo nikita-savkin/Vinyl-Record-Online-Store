@@ -31,7 +31,7 @@ export const Navigation = styled.nav`
   transform: translateX(-50%);
 `;
 
-export const NavButton = styled(Link)`
+export const NavButton = styled.div`
   font-size: 18px;
   padding: 0 20px;
   cursor: pointer;

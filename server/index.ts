@@ -8,13 +8,16 @@ import products from './mocks/products.js';
 
 import productsMock from './mocks/products.js';
 
+dotenv.config();
+
 const DB_USERNAME = process.env.DB_USERNAME ?? 'test_user';
 const DB_PASSWORD = process.env.DB_PASSWORD ?? '4r9M9Yopp1htP2V8';
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = 'mongodb+srv://cluster0.zwjtosd.mongodb.net/vinyl-online-store?retryWrites=true&w=majority';
 const app = express();
 
-dotenv.config();
+console.log(process.env);
+
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());

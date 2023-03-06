@@ -1,40 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface SelectedFilterType {
-  filterParent: string;
-  filterItem: string;
-}
-
-interface ProductsFilterStateType {
-  artist: string[];
-  genre: string[];
-  label: string[];
-  year: string[];
-}
+import type {
+  ProductsFilterStateType,
+  SelectedFiltersType,
+} from '@pages/Products/components/ProductsFilter/types/filter-state.types';
 
 const initialState: ProductsFilterStateType = {
-  artist: [],
-  genre: [],
-  label: [],
-  year: [],
+  selectedFilters: {},
 };
 
 export const productsFilter = createSlice({
   name: 'productsFilter',
   initialState,
   reducers: {
-    setFilters: (state, action: PayloadAction<SelectedFilterType>) => {
-      const { filterParent, filterItem } = action.payload;
-      const currentParentFilter = state[filterParent as keyof ProductsFilterStateType] ?? null;
-
-      if (currentParentFilter) {
-        if (!currentParentFilter.includes(filterItem)) {
-          currentParentFilter.push(filterItem);
-        } else {
-          const indexOfFilter = currentParentFilter.indexOf(filterItem);
-          currentParentFilter.splice(indexOfFilter, 1);
-        }
-      }
+    setFilters: (state, action: PayloadAction<SelectedFiltersType>) => {
+      state.selectedFilters = action.payload;
     },
   },
 });

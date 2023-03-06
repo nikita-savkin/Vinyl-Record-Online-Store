@@ -1,17 +1,11 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { getFetchProducts, getProductsSuccess, getProductsFailure } from '@pages/Products/reducer/products-reducer';
-import { fetchProductsFromStorage } from '@shared/firebase/utils/products-utils';
+import { fetchProducts } from '@shared/api';
 
-function* startProductsFetch(value: any) {
-  const { directionType, selectedFilters } = value.payload;
-  const prevLastVisibleId = value.payload.lastVisibleId;
-  const prevFirstVisibleId = value.payload.firstVisibleId;
-
+function* startProductsFetch({ payload }: any) {
   try {
-    const { products, firstVisibleId, lastVisibleId } = yield call(() =>
-      fetchProductsFromStorage(directionType, prevFirstVisibleId, prevLastVisibleId, selectedFilters),
-    );
-    yield put(getProductsSuccess({ products, firstVisibleId, lastVisibleId }));
+    const { data: products } = yield call(() => fetchProducts(payload.params));
+    yield put(getProductsSuccess(products));
   } catch (err) {
     console.error(err);
     yield put(getProductsFailure());

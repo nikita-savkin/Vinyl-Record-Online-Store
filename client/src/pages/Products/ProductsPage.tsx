@@ -2,16 +2,22 @@ import ProductsFilter from '@pages/Products/components/ProductsFilter/ProductsFi
 import ProductPreview from '@shared/components/ProductPreview/ProductPreview';
 import { ProductsPageWrapper, ProductsFilterWrapper, ProductsListWrapper } from '@pages/Products/ProductsPage.styles';
 import { useAppSelector, useAppDispatch } from '@shared/hooks/dispatch-selector';
-import { useEffect } from 'react';
-import { getFetchProducts } from '@pages/Products/reducer/products-reducer';
+import { useEffect, useState } from 'react';
+import { getFetchProducts, setPage, setLimit } from '@pages/Products/reducer/products-reducer';
 import { ProductFull } from '@shared/types/common-types';
-import { Button } from 'antd';
-import { fetchProducts } from '@shared/api';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Pagination } from 'antd';
+import qs from 'qs';
 
 const ProductsPage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { allProducts, isProductsLoading, fetchErrorMessage, firstVisibleId, lastVisibleId, currentPage, totalPages } =
-    useAppSelector((state) => state.products);
+  const location = useLocation();
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const { allProducts, isProductsLoading, fetchErrorMessage, currentPage, totalPages, limit } = useAppSelector(
+    (state) => state.products,
+  );
+  const selectedFilters = useAppSelector((state) => state.productsFilter.selectedFilters);
 
   const ProductsListCondition = (): JSX.Element => {
     if (fetchErrorMessage) return <div>Error</div>;
@@ -19,27 +25,61 @@ const ProductsPage = () => {
 
     return (
       <>
-        {allProducts.map((product: ProductFull) => {
-          return <ProductPreview product={product} key={product.uid} />;
-        })}
+        {allProducts?.map((product: ProductFull) => (
+          <ProductPreview product={product} key={product.uid} />
+        ))}
       </>
     );
   };
 
-  const dispatchProductsPayload = (directionType: 'next' | 'prev' | null) => {
-    // dispatch(getFetchProducts({ firstVisibleId, lastVisibleId, directionType, selectedFilters: {} }));
+  const fetchDataWithSearchParams = () => {
+    const urlParams = new URLSearchParams(location.search);
+    const queryPage = urlParams.get('page') ?? null;
+    const queryLimit = urlParams.get('limit') ?? null;
+
+    if (queryPage) {
+      dispatch(setPage(Number(queryPage)));
+    }
+
+    if (queryLimit) {
+      dispatch(setLimit(Number(queryLimit)));
+    }
+
+    updateSearchParamsAndFetchProducts(queryPage, queryLimit);
+  };
+
+  const updateSearchParamsAndFetchProducts = (
+    pageNew?: number | string | null,
+    limitNew?: number | string | null,
+    newFilters?: any[],
+  ) => {
+    const pathname = location.pathname;
+    const params = {
+      page: pageNew ?? currentPage,
+      limit: limitNew ?? limit,
+      filters: newFilters ?? selectedFilters,
+    };
+
+    navigate({
+      pathname,
+      search: qs.stringify(params),
+    });
+
+    dispatch(getFetchProducts({ params }));
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    dispatch(setPage(pageNumber));
   };
 
   useEffect(() => {
-    const products = async () => {
-      const yo = await fetchProducts();
-      console.log(yo);
-    };
-
-    // yo();
-
-    // dispatchProductsPayload(null);
-  }, []);
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      fetchDataWithSearchParams();
+    } else {
+      updateSearchParamsAndFetchProducts();
+    }
+  }, [currentPage, selectedFilters]);
 
   return (
     <ProductsPageWrapper>
@@ -52,12 +92,7 @@ const ProductsPage = () => {
           <ProductsListCondition />
         </ProductsListWrapper>
         <div>
-          <Button onClick={() => dispatchProductsPayload('prev')} disabled={currentPage === 1}>
-            Prev
-          </Button>
-          <Button onClick={() => dispatchProductsPayload('next')} disabled={currentPage === totalPages}>
-            Next
-          </Button>
+          <Pagination current={currentPage} onChange={handlePageChange} total={totalPages} defaultPageSize={limit} />
         </div>
       </div>
     </ProductsPageWrapper>
