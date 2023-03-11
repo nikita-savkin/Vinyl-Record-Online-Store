@@ -6,3 +6,7 @@ const API = axios.create({ baseURL: 'http://localhost:5000' });
 export const fetchProducts = (productsParams: ProductsFilterStateType) => {
   return API.get('/products', { params: productsParams });
 };
+
+export const fetchFilterStructure = () => {
+  return API.get('/products/filter-structure');
+};

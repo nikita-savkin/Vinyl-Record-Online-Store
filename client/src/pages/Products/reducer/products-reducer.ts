@@ -4,7 +4,7 @@ import type { ProductsStateType, FetchProductsPayloadType } from '@pages/Product
 const START_PAGE = 1;
 const TOTAL_PAGES = 1;
 const DEFAULT_PAGE_SIZE = 9;
-const FETCH_ERROR_MESSAGE = 'Error in products loading';
+const FETCH_ERROR_MESSAGE = 'An error occurred while loading the list of products';
 
 const initialState: ProductsStateType = {
   allProducts: [],
@@ -20,6 +20,7 @@ export const products = createSlice({
   initialState,
   reducers: {
     getFetchProducts: (state, action: PayloadAction<FetchProductsPayloadType>) => {
+      state.fetchErrorMessage = null;
       state.isProductsLoading = true;
     },
     getProductsSuccess: (state, action) => {

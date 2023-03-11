@@ -35,6 +35,7 @@ const Header = () => {
     const navSettings = { pathname: nav.link, search: '' };
     const params = {
       page: '1',
+      limit: '9',
     };
 
     if (nav.id === 'products') {

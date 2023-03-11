@@ -1,13 +1,16 @@
 import mongoose from 'mongoose';
 
-const productSchema = new mongoose.Schema({
-  id: { type: Number },
-  artist: { type: String },
-  label: { type: String },
-  storageImgUrl: { type: String },
-  price: { type: Number },
-  genre: { type: Array },
-  year: { type: String },
-});
+const productSchema = new mongoose.Schema(
+  {
+    id: Number,
+    artist: String,
+    label: String,
+    storageImgUrl: String,
+    price: Number,
+    genre: [String],
+    year: String,
+  },
+  { collection: 'products' },
+);
 
 export default mongoose.model('Products', productSchema);

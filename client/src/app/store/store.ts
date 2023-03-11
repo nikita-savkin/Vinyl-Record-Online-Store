@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import rootReducer from '@app/store/root-reducer';
 import { userApi } from '@pages/AuthPage/reducer/user-reducer';
-import productsSaga from '@pages/Products/reducer/products-saga';
+import rootSaga from '@app/store/root-saga';
 
 const defaultMiddleware = [logger, userApi.middleware];
 const sagaMiddleware = createSagaMiddleware();
@@ -13,7 +13,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), ...defaultMiddleware, sagaMiddleware],
 });
 
-sagaMiddleware.run(productsSaga);
+sagaMiddleware.run(rootSaga);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
