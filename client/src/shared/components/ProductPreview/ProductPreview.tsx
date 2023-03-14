@@ -10,13 +10,14 @@ import {
   ProductName,
   ProductPrice,
 } from './ProductPreview.styles';
+import capitalizeString from '@shared/utils/capitalize-string';
 
 interface ProductPreviewProps {
   product: ProductFull;
 }
 
 const ProductPreview: FC<ProductPreviewProps> = ({ product }: ProductPreviewProps) => {
-  const { uid, artist, album, price, storageImgUrl } = product;
+  const { _id, artist, album, price, storageImgUrl } = product;
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -33,29 +34,32 @@ const ProductPreview: FC<ProductPreviewProps> = ({ product }: ProductPreviewProp
   }, []);
 
   return (
-    <ProductPreviewWrapper to={`/product/${uid}`}>
+    <ProductPreviewWrapper to={`/product/${_id}`}>
       <ImageWrapper>
         <ImageTemplate src='/img/vinyl-template.png' alt='vinyl-template' />
         <ImageCover src={imageUrl} alt='vinyl-cover' />
       </ImageWrapper>
       <ProductName>
-        {artist} - {album}
+        <div>
+          <h4>{capitalizeString(artist)}</h4>
+          <h5>{capitalizeString(album)}</h5>
+        </div>
+        <ProductPrice>&#8364;{price}</ProductPrice>
       </ProductName>
-      <ProductPrice>&#8364;{price}</ProductPrice>
     </ProductPreviewWrapper>
   );
 };
 
 ProductPreview.defaultProps = {
   product: {
-    uid: '',
-    artist: 'Joy Division',
-    album: 'Unknown Pleasures',
-    label: 'Mofi',
-    storageImgUrl: 'covers/unknown-pleasures.jpeg',
-    price: 50,
-    genre: ['Punk', 'Rock'],
-    year: '60',
+    _id: '',
+    artist: '',
+    album: '',
+    label: '',
+    storageImgUrl: '',
+    price: 0,
+    genre: [],
+    year: '',
   },
 };
 

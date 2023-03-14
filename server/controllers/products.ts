@@ -2,7 +2,7 @@ import Products from '../models/products.js';
 import FilterStructure from '../models/filter-structure.js';
 
 export const getProducts = async (req: any, res: any) => {
-  const { page, limit, filters } = req.query;
+  const { page, limit, sorting, filters } = req.query;
 
   const parsedFilters = Object.keys(filters ?? {}).map((key) => {
     return {
@@ -13,6 +13,10 @@ export const getProducts = async (req: any, res: any) => {
         : filters[key],
     };
   });
+
+  const parsedSorting = {
+    [sorting?.sortBy]: sorting?.direction,
+  };
 
   const priceSettings = {
     ...((filters?.minPrice || filters?.maxPrice) && {
@@ -30,7 +34,7 @@ export const getProducts = async (req: any, res: any) => {
   try {
     const startIndex = (Number(page) - 1) * limit;
     const total = await Products.countDocuments(filterSettings);
-    const products = await Products.find(filterSettings).sort({ _id: -1 }).limit(limit).skip(startIndex);
+    const products = await Products.find(filterSettings).sort(parsedSorting).limit(limit).skip(startIndex);
 
     res.json({ products, total });
   } catch (error) {

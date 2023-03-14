@@ -7,6 +7,7 @@ export interface ProductsStateType {
   totalPages: number;
   limit: number;
   currentPage: number;
+  sorting: SortingOptionType | null;
 }
 
 export interface FetchProductsPayloadType {
@@ -14,4 +15,11 @@ export interface FetchProductsPayloadType {
     page: number | string;
     limit: number | string;
   };
+}
+
+export interface SortingOptionType {
+  sortBy: string;
+  direction: 'asc' | 'desc';
+  value?: string;
+  label?: string;
 }

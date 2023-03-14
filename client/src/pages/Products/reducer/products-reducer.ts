@@ -1,10 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { ProductsStateType, FetchProductsPayloadType } from '@pages/Products/types/products-reducer-types';
-
-const START_PAGE = 1;
-const TOTAL_PAGES = 1;
-const DEFAULT_PAGE_SIZE = 9;
-const FETCH_ERROR_MESSAGE = 'An error occurred while loading the list of products';
+import type {
+  ProductsStateType,
+  FetchProductsPayloadType,
+  SortingOptionType,
+} from '@pages/Products/types/products-reducer-types';
+import {
+  DEFAULT_PAGE_SIZE,
+  TOTAL_PAGES,
+  START_PAGE,
+  SORTING_OPTIONS,
+  FETCH_ERROR_MESSAGE,
+} from '@pages/Products/constants';
 
 const initialState: ProductsStateType = {
   allProducts: [],
@@ -13,6 +19,10 @@ const initialState: ProductsStateType = {
   limit: DEFAULT_PAGE_SIZE,
   totalPages: TOTAL_PAGES,
   currentPage: START_PAGE,
+  sorting: {
+    sortBy: SORTING_OPTIONS[0]?.sortBy ?? '',
+    direction: SORTING_OPTIONS[0]?.direction ?? 'asc',
+  },
 };
 
 export const products = createSlice({
@@ -34,15 +44,19 @@ export const products = createSlice({
       state.fetchErrorMessage = FETCH_ERROR_MESSAGE;
       state.isProductsLoading = false;
     },
-    setPage: (state, action) => {
+    setPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    setLimit: (state, action) => {
+    setLimit: (state, action: PayloadAction<number>) => {
       state.limit = action.payload;
+    },
+    setSorting: (state, action: PayloadAction<SortingOptionType>) => {
+      state.sorting = action.payload;
     },
   },
 });
 
-export const { getFetchProducts, getProductsSuccess, getProductsFailure, setPage, setLimit } = products.actions;
+export const { getFetchProducts, getProductsSuccess, getProductsFailure, setPage, setLimit, setSorting } =
+  products.actions;
 
 export default products.reducer;

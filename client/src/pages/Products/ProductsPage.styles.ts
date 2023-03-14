@@ -25,7 +25,7 @@ export const ProductsListWrapper = styled.div`
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 
   ${ProductPreviewWrapper} {
     &:nth-child(1) {
@@ -65,4 +65,9 @@ export const ProductsListWrapper = styled.div`
       grid-area: 3 / 1 / 4 / 2;
     }
   }
+`;
+
+export const PaginationBlock = styled.div`
+  display: flex;
+  justify-content: center;
 `;

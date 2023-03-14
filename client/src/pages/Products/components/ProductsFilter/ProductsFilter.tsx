@@ -1,5 +1,10 @@
 import { Menu, Button, Slider } from 'antd';
-import { FilterCheckbox, MenuItem } from '@pages/Products/components/ProductsFilter/ProductsFilter.styles';
+import {
+  FilterCheckbox,
+  FilterItem,
+  SubMenu,
+  Filter,
+} from '@pages/Products/components/ProductsFilter/ProductsFilter.styles';
 import { useAppDispatch, useAppSelector } from '@shared/hooks/dispatch-selector';
 import { setFilters, getFilterStructure } from '@pages/Products/components/ProductsFilter/reducer/filter-reducer';
 import { useEffect, useState } from 'react';
@@ -75,11 +80,11 @@ const ProductsFilter = () => {
 
   return (
     <div>
-      <Menu style={{ width: 260 }} mode={'inline'}>
+      <Filter style={{ width: 260 }} mode={'inline'}>
         {filterStructure?.tree?.map((filterParent) => (
-          <Menu.SubMenu title={filterParent.label} key={filterParent.id}>
+          <SubMenu title={filterParent.label} key={filterParent.id}>
             {filterParent.items.map((subFilterItem) => (
-              <MenuItem key={subFilterItem.id}>
+              <FilterItem key={subFilterItem.id}>
                 <FilterCheckbox
                   onClick={() =>
                     onFilterClick(filterParent.id as keyof SelectedFiltersType, subFilterItem.id.toLowerCase())
@@ -87,12 +92,12 @@ const ProductsFilter = () => {
                 >
                   {subFilterItem.label}
                 </FilterCheckbox>
-              </MenuItem>
+              </FilterItem>
             ))}
-          </Menu.SubMenu>
+          </SubMenu>
         ))}
-      </Menu>
-      <div className=''>
+      </Filter>
+      <div>
         <span>Price</span>
         <Slider onChange={handlePriceChange} min={minPrice} max={maxPrice} value={minMaxPricesSlider} step={1} range />
       </div>

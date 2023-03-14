@@ -5,7 +5,7 @@ import rootReducer from '@app/store/root-reducer';
 import { userApi } from '@pages/AuthPage/reducer/user-reducer';
 import rootSaga from '@app/store/root-saga';
 
-const defaultMiddleware = [logger, userApi.middleware];
+const defaultMiddleware = [userApi.middleware];
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({

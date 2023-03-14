@@ -1,5 +1,5 @@
 export interface ProductFull {
-  uid: string | null;
+  _id: string | null;
   artist: string;
   album: string;
   label: string;
