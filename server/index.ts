@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import productsRouter from './routes/products.js';
+import productRouter from './routes/product.js';
 
 import productsMock from './mocks/products.js';
 import filtersStructure from './mocks/filters-structure.js';
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
 app.use('/products', productsRouter);
+app.use('/product', productRouter);
 
 mongoose.set('strictQuery', true);
 

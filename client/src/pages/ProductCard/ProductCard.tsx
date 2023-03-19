@@ -6,50 +6,53 @@ import { getStorageFileUrl } from '@shared/firebase/utils/get-storage-file-url';
 import { useAppDispatch, useAppSelector } from '@shared/hooks/dispatch-selector';
 import { addProduct } from '@widgets/Cart/reducer/cart-reducer';
 import { ProductFull } from '@shared/types/common-types';
+import { getFetchProduct } from '@pages/ProductCard/reducer/product-card-reducer';
 
 const productDefault = {
-  id: null,
-  author: '',
-  albumName: '',
+  _id: null,
+  artist: '',
+  album: '',
   label: '',
   genre: [],
-  format: '',
   storageImgUrl: '',
   price: null,
+  year: '',
 };
 
 const ProductCard = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const products: ProductFull[] = useAppSelector((state) => state.products.allProducts);
+  const { artist, album, price, storageImgUrl, label } = useAppSelector((state) => state.productCard.product);
 
-  const [product, setProduct] = useState<ProductFull>(productDefault);
   const [imageUrl, setImageUrl] = useState('');
 
-  const { author, albumName, format, price } = product;
+  // const { artist, album, price, storageImgUrl, label } = product;
 
   useEffect(() => {
-    if (params.id) {
-      const currentProductId = Number(params.id);
-      const currentProduct = products.find((product) => product.id === currentProductId);
+    if (params.id) dispatch(getFetchProduct(params.id));
+  }, []);
 
-      if (currentProduct) setProduct(currentProduct);
-
-      if (currentProduct?.storageImgUrl?.length) {
-        const fetchData = async () => {
-          const data = await getStorageFileUrl(currentProduct.storageImgUrl);
-          setImageUrl(data);
-        };
-
-        fetchData().catch((e) => {
-          console.error(e);
-        });
-      }
-    }
-  }, [products]);
+  // useEffect(() => {
+  //   if (params.id) {
+  //     const currentProduct = products.find((product) => product._id === params.id);
+  //
+  //     if (currentProduct) setProduct(currentProduct);
+  //
+  //     if (currentProduct?.storageImgUrl?.length) {
+  //       const fetchData = async () => {
+  //         const data = await getStorageFileUrl(currentProduct.storageImgUrl);
+  //         setImageUrl(data);
+  //       };
+  //
+  //       fetchData().catch((e) => {
+  //         console.error(e);
+  //       });
+  //     }
+  //   }
+  // }, [products]);
 
   const addProductToCart = () => {
-    dispatch(addProduct(product));
+    // dispatch(addProduct(product));
   };
 
   return (
@@ -59,11 +62,11 @@ const ProductCard = () => {
       </Cover>
       <Description>
         <h1>
-          <span>{author}</span>
+          <span>{artist}</span>
           <br />
-          <span>{albumName}</span>
+          <span>{album}</span>
           <br />
-          <span>{format}</span>
+          <span>{label}</span>
         </h1>
         <span>{price}</span>
         <p>description</p>

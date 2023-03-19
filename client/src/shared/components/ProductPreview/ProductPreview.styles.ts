@@ -9,6 +9,7 @@ export const ProductPreviewWrapper = styled(Link)`
   text-decoration: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
+  border-radius: 5px;
 
   &:hover {
     transform: scale(1.01);
