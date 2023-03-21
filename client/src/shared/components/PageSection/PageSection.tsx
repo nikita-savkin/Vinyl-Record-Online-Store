@@ -3,23 +3,17 @@ import LinkButton from '@shared/ui/LinkButton/LinkButton';
 import { PageSectionWrapper, Top } from './PageSection.styles';
 
 interface PageSectionPropsType {
-  sectionTop?: {
-    title: string;
-    btnTitle?: string;
-    btnLink?: string;
-  };
+  title: string;
+  btnTitle?: string;
+  btnLink?: string;
   children?: JSX.Element;
 }
 
 const PageSectionDefaultProps: PageSectionPropsType = {
-  sectionTop: {
-    title: 'Section Title',
-  },
+  title: 'Section Title',
 };
 
-const PageSection = ({ sectionTop, children }: PageSectionPropsType) => {
-  const { title, btnTitle, btnLink } = sectionTop;
-
+const PageSection = ({ children, title, btnTitle, btnLink }: PageSectionPropsType) => {
   return (
     <PageSectionWrapper>
       <Top className='page-section__top'>

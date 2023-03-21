@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
-    "@stripe/react-stripe-js": "^2.0.0",
-    "@stripe/stripe-js": "^1.50.0",
     "@types/redux-logger": "^3.0.9",
     "@types/uuid": "^9.0.0",
     "antd": "^5.1.6",
@@ -30,7 +28,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.2.2",
     "styled-components": "^5.3.6",
-    "uuid": "^9.0.0",
+    "swiper": "^9.1.1",
     "yarn": "^1.22.19"
   },
   "devDependencies": {

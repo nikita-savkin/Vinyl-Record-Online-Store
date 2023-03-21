@@ -13,7 +13,7 @@ const StartedBanner = () => {
           We are passionate about sound quality, we stock the very best audiophile grade vinyl records and have probably
           the largest stockholding in the UK
         </p>
-        <LinkButton title='Show all' />
+        <LinkButton link='/products' title='Show all' />
       </Info>
       <BannerRight>
         <img src='/img/started-banner-2.png' alt='started-banner-1' />

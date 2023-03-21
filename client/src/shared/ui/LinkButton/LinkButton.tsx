@@ -6,9 +6,9 @@ interface LinkButtonType {
   link?: string;
 }
 
-const LinkButton = ({ title, link }: LinkButtonType) => {
+const LinkButton = ({ title, link = '' }: LinkButtonType) => {
   return (
-    <LinkButtonWrapper>
+    <LinkButtonWrapper to={link}>
       <span>{title}</span>
       <ArrowLongSvg />
     </LinkButtonWrapper>
