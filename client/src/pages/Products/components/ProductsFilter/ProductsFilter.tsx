@@ -1,4 +1,4 @@
-import { Button, Slider } from 'antd';
+import { Slider } from 'antd';
 import {
   FilterCheckbox,
   FilterItem,

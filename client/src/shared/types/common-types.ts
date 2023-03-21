@@ -7,4 +7,5 @@ export interface ProductFull {
   storageImgUrl: string;
   price: number | null;
   year: string;
+  desc?: string;
 }

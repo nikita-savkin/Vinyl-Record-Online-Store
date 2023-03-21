@@ -9,9 +9,10 @@ const initialState: ProductCardStateType = {
     album: '',
     label: '',
     genre: [],
-    storageImgUrl: '',
+    storageImgUrl: '/img/vinyl-template.png',
     price: null,
     year: '',
+    desc: '',
   },
   isProductLoading: false,
 };

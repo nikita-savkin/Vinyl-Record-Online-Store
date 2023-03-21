@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Checkbox, Menu } from 'antd';
+import { COLORS } from '@shared/assets/styles/variables-styles';
 
 export const Filter = styled(Menu)`
   border-inline-end: none !important;
@@ -7,6 +8,29 @@ export const Filter = styled(Menu)`
 
   .ant-menu-submenu-title {
     padding-left: 10px;
+  }
+
+  .ant-menu-submenu-selected {
+    color: ${COLORS.red} !important;
+  }
+
+  .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    color: ${COLORS.red} !important;
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: ${COLORS.red} !important;
+    border-color: ${COLORS.red} !important;
+  }
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  .ant-checkbox:hover .ant-checkbox-inner,
+  .ant-checkbox-input:focus + .ant-checkbox-inner,
+  .ant-checkbox-checked:after {
+    border-color: ${COLORS.red} !important;
+  }
+
+  .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+    background-color: ${COLORS.red} !important;
   }
 `;
 
@@ -27,6 +51,8 @@ export const FilterCheckbox = styled(Checkbox)`
 `;
 
 export const PriceSliderBlock = styled.div`
+  margin-bottom: 45px;
+
   h5 {
     font-weight: 600;
     font-size: 16px;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { COLORS } from '@shared/assets/styles/variables-styles';
 
 export const HeaderWrapper = styled.header`
   position: relative;
@@ -37,6 +38,11 @@ export const NavButton = styled.div`
   cursor: pointer;
   color: #000;
   text-decoration: none;
+  transition: 0.3s;
+
+  &:hover {
+    color: ${COLORS.red};
+  }
 `;
 
 export const UserControl = styled.div`
@@ -52,5 +58,11 @@ export const UserControl = styled.div`
 
   a:first-child {
     margin-right: 20px;
+  }
+
+  .user-email {
+    display: block;
+    margin-right: 10px;
+    cursor: pointer;
   }
 `;

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const CartProductItemWrapper = styled.div`
   display: flex;
-  padding: 10px 0;
+  padding: 15px 0;
+  border-bottom: 1px solid #cacaca;
 `;
 
 export const PoductImage = styled.div`
@@ -21,9 +22,21 @@ export const Description = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  span {
+    display: block;
+    margin-top: auto;
+  }
 `;
 
 export const DescrTop = styled.div`
   display: flex;
   justify-content: space-between;
+
+  h6 {
+    margin: 0 0 10px 0;
+    display: block;
+    font-weight: 600;
+    font-size: 17px;
+  }
 `;

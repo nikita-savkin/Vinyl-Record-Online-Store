@@ -6,6 +6,7 @@ export const ProductPreviewWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 320px;
   text-decoration: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
@@ -15,9 +16,16 @@ export const ProductPreviewWrapper = styled(Link)`
     transform: scale(1.01);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
   }
+
+  .ant-spin-dot-item {
+    background-color: ${COLORS.red};
+  }
 `;
 
 export const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 100%;
   aspect-ratio: 1/1;
@@ -44,6 +52,8 @@ export const ProductName = styled.div`
   font-weight: 700;
   color: #000;
   margin: 0 10px;
+  height: 80px;
+  max-height: 80px;
 
   h4,
   h5 {

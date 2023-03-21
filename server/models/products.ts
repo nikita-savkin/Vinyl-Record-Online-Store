@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema(
     price: Number,
     genre: [String],
     year: String,
+    desc: String,
   },
   { collection: 'products' },
 );

@@ -21,7 +21,7 @@ const initialState: ProductsStateType = {
   currentPage: START_PAGE,
   sorting: {
     sortBy: SORTING_OPTIONS[0]?.sortBy ?? '',
-    direction: SORTING_OPTIONS[0]?.direction ?? 'asc',
+    direction: SORTING_OPTIONS[0]?.direction ?? 'desc',
   },
 };
 

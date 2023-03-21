@@ -6,29 +6,31 @@ import {
 } from '@widgets/Cart/components/CartProductItem/CartProductItem.styles';
 import { useAppDispatch } from '@shared/hooks/dispatch-selector';
 import { removeProduct } from '@widgets/Cart/reducer/cart-reducer';
+import { ProductFull } from '@shared/types/common-types';
+import capitalizeString from '@shared/utils/capitalize-string';
 
-const CartProductItem = ({ id }: { id: number | null }) => {
+const CartProductItem = ({ product }: { product: ProductFull }) => {
   const dispatch = useAppDispatch();
+  const { artist, album, storageImgUrl, price } = product;
 
   const removeHandle = () => {
-    dispatch(removeProduct(id));
+    dispatch(removeProduct(product._id));
   };
 
   return (
     <CartProductItemWrapper>
       <PoductImage>
-        <img src='/img/vinyl-template.png' alt='product-cover' />
+        <img src={storageImgUrl} alt='product-cover' />
       </PoductImage>
       <Description>
         <DescrTop>
           <div>
-            <span>author - album</span>
-            <br />
-            <span>label</span>
+            <h6>{capitalizeString(artist)}</h6>
+            <h6>{capitalizeString(album)}</h6>
           </div>
           <div onClick={removeHandle}>Remove</div>
         </DescrTop>
-        <div>price</div>
+        <span className='desc-price'>{price}&#8364;</span>
       </Description>
     </CartProductItemWrapper>
   );

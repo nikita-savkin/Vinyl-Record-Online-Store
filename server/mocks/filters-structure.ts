@@ -8,8 +8,8 @@ const filterItems = [
         label: 'Pink Floyd',
       },
       {
-        id: 'the doors',
-        label: 'The Doors',
+        id: 'doors',
+        label: 'Doors',
       },
       {
         id: 'michael jackson',
@@ -20,8 +20,8 @@ const filterItems = [
         label: 'Madonna',
       },
       {
-        id: 'the beatles',
-        label: 'The Beatles',
+        id: 'beatles',
+        label: 'Beatles',
       },
       {
         id: 'nirvana',
@@ -44,8 +44,8 @@ const filterItems = [
         label: 'Marvin Gaye',
       },
       {
-        id: 'creedence clearwater revival',
-        label: 'Creedence Clearwater Revival',
+        id: 'rolling stones',
+        label: 'Rolling Stones',
       },
     ],
   },

@@ -1,18 +1,13 @@
 const navigation = [
   {
+    id: 'home',
+    name: 'Home',
+    link: '/',
+  },
+  {
     id: 'products',
-    name: 'Music',
+    name: 'Vinyl',
     link: '/products',
-  },
-  {
-    id: 'reviews',
-    name: 'Reviews',
-    link: '/reviews',
-  },
-  {
-    id: 'about',
-    name: 'About',
-    link: '/about',
   },
 ];
 

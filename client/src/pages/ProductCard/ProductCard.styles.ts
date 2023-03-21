@@ -3,10 +3,17 @@ import { COLORS } from '@shared/assets/styles/variables-styles';
 
 export const ProductCardWrapper = styled.div`
   display: flex;
+
+  .ant-spin-dot-item {
+    background-color: ${COLORS.red};
+  }
 `;
 
 export const Cover = styled.div`
-  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 40%;
   margin-right: 30px;
 
   img {
@@ -20,6 +27,10 @@ export const Cover = styled.div`
 export const Description = styled.div`
   display: flex;
   flex-direction: column;
+
+  .genre-block {
+    margin-bottom: 30px;
+  }
 
   h1 {
     margin: 0 0 20px 0;
@@ -42,8 +53,21 @@ export const Description = styled.div`
 
 export const ButtonsWrapper = styled.div`
   button {
+    width: 200px;
+
     &:first-child {
       margin-right: 10px;
     }
   }
+`;
+
+export const GenreItem = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+  border-radius: 20px;
+  padding: 7px 20px;
+  color: ${COLORS.red};
+  margin-right: 15px;
 `;

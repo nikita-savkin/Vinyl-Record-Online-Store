@@ -19,10 +19,11 @@ export const cart = createSlice({
       state.showCart = action.payload;
     },
     addProduct: (state, action: PayloadAction<ProductFull>) => {
-      state.selectedProducts.push(action.payload);
+      const hasProduct = state.selectedProducts.some((product) => product._id === action.payload._id);
+      if (!hasProduct) state.selectedProducts.push(action.payload);
     },
-    removeProduct: (state, action: PayloadAction<number | null>) => {
-      state.selectedProducts = state.selectedProducts.filter((product) => product.id !== action.payload);
+    removeProduct: (state, action: PayloadAction<string | null>) => {
+      state.selectedProducts = state.selectedProducts.filter((product) => product._id !== action.payload);
     },
   },
 });

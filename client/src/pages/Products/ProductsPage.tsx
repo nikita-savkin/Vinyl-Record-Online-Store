@@ -5,6 +5,7 @@ import {
   ProductsFilterWrapper,
   ProductsListWrapper,
   PaginationBlock,
+  SortingSelectWrapper,
 } from '@pages/Products/ProductsPage.styles';
 import { useAppSelector, useAppDispatch } from '@shared/hooks/dispatch-selector';
 import { useEffect, useState } from 'react';
@@ -79,6 +80,7 @@ const ProductsPage = () => {
 
   const handlePageChange = (pageNumber: number) => {
     dispatch(setPage(pageNumber));
+    window.scrollTo(0, 0);
   };
 
   const handleSortingChange = (value: string) => {
@@ -99,14 +101,17 @@ const ProductsPage = () => {
 
   return (
     <div>
-      <div>
-        <Select
-          onChange={handleSortingChange}
-          value={selectedSortingValue}
-          options={SORTING_OPTIONS}
-          style={{ width: 200 }}
-        />
-      </div>
+      <SortingSelectWrapper>
+        <div>
+          <span>Sort by</span>
+          <Select
+            onChange={handleSortingChange}
+            value={selectedSortingValue}
+            options={SORTING_OPTIONS}
+            style={{ width: 200 }}
+          />
+        </div>
+      </SortingSelectWrapper>
       <ProductsPageWrapper>
         <ProductsFilterWrapper>
           <h3>Filters</h3>

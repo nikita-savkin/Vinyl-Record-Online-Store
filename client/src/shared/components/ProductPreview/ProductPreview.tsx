@@ -11,6 +11,7 @@ import {
   ProductPrice,
 } from './ProductPreview.styles';
 import capitalizeString from '@shared/utils/capitalize-string';
+import { Spin } from 'antd';
 
 interface ProductPreviewProps {
   product: ProductFull;
@@ -19,12 +20,18 @@ interface ProductPreviewProps {
 const ProductPreview: FC<ProductPreviewProps> = ({ product }: ProductPreviewProps) => {
   const { _id, artist, album, price, storageImgUrl } = product;
   const [imageUrl, setImageUrl] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
 
   useEffect(() => {
     if (storageImgUrl?.length) {
+      setImageLoading(true);
+
       const fetchData = async () => {
         const data = await getStorageFileUrl(storageImgUrl);
         setImageUrl(data);
+        setTimeout(() => {
+          setImageLoading(false);
+        }, 1000);
       };
 
       fetchData().catch((e) => {
@@ -36,8 +43,14 @@ const ProductPreview: FC<ProductPreviewProps> = ({ product }: ProductPreviewProp
   return (
     <ProductPreviewWrapper to={`/product/${_id}`}>
       <ImageWrapper>
-        <ImageTemplate src='/img/vinyl-template.png' alt='vinyl-template' />
-        <ImageCover src={imageUrl} alt='vinyl-cover' />
+        {imageLoading ? (
+          <Spin size='large' />
+        ) : (
+          <>
+            <ImageTemplate src='/img/vinyl-template.png' alt='vinyl-template' />
+            <ImageCover src={imageUrl} alt='vinyl-cover' />
+          </>
+        )}
       </ImageWrapper>
       <ProductName>
         <div>

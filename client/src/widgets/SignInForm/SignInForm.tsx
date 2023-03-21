@@ -13,9 +13,8 @@ const SignInForm = () => {
   const signInByGoogle = async () => {
     try {
       await signInWithGooglePopup();
+      window.location.href = '/';
     } catch (e) {
-      // TODO убрать все алерты
-      alert("Can't sign in");
       console.error(e);
     }
   };
@@ -29,9 +28,8 @@ const SignInForm = () => {
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Firebase: Error (auth/user-not-found).') {
-          alert('User not found');
         } else {
-          alert("Can't sign in");
+          console.error(error);
         }
       }
     }

@@ -53,11 +53,11 @@ export const ProductsListWrapper = styled.div`
       }
 
       ${ImageCover} {
-        width: 71%;
+        width: 78%;
         height: 65%;
         top: 0;
         left: 0;
-        transform: translate(7%, 31%);
+        transform: translate(2%, 31%);
       }
     }
 
@@ -70,4 +70,28 @@ export const ProductsListWrapper = styled.div`
 export const PaginationBlock = styled.div`
   display: flex;
   justify-content: center;
+
+  .ant-pagination-item-active {
+    border-color: ${COLORS.red};
+
+    a {
+      color: ${COLORS.red};
+    }
+  }
+`;
+
+export const SortingSelectWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  .ant-select-selector {
+    border: 1px solid #ff9f9f !important;
+  }
+
+  > div {
+    > span {
+      margin-right: 10px;
+      color: ${COLORS.red};
+    }
+  }
 `;
