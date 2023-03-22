@@ -21,7 +21,7 @@ const ProductCard = () => {
   const product = useAppSelector((state) => state.productCard.product);
   const { artist, album, price, storageImgUrl, label, genre, desc } = product;
   const [imageUrl, setImageUrl] = useState('/img/vinyl-template.png');
-  const [imageLoading, setImageLoading] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
     if (params.id) dispatch(getFetchProduct(params.id));
@@ -33,14 +33,17 @@ const ProductCard = () => {
       const fetchData = async () => {
         const data = await getStorageFileUrl(storageImgUrl);
         setImageUrl(data);
-        setTimeout(() => {
-          setImageLoading(false);
-        }, 1000);
       };
 
-      fetchData().catch((e) => {
-        console.error(e);
-      });
+      fetchData()
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setImageLoading(false);
+          }, 1000);
+        });
     }
   }, [storageImgUrl]);
 

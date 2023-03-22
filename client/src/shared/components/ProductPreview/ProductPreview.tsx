@@ -29,14 +29,17 @@ const ProductPreview: FC<ProductPreviewProps> = ({ product }: ProductPreviewProp
       const fetchData = async () => {
         const data = await getStorageFileUrl(storageImgUrl);
         setImageUrl(data);
-        setTimeout(() => {
-          setImageLoading(false);
-        }, 1000);
       };
 
-      fetchData().catch((e) => {
-        console.error(e);
-      });
+      fetchData()
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setImageLoading(false);
+          }, 1000);
+        });
     }
   }, []);
 
