@@ -8,6 +8,7 @@ import { useAppDispatch } from '@shared/hooks/dispatch-selector';
 import { removeProduct } from '@widgets/Cart/reducer/cart-reducer';
 import { ProductFull } from '@shared/types/common-types';
 import capitalizeString from '@shared/utils/capitalize-string';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 const CartProductItem = ({ product }: { product: ProductFull }) => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,7 @@ const CartProductItem = ({ product }: { product: ProductFull }) => {
             <h6>{capitalizeString(artist)}</h6>
             <h6>{capitalizeString(album)}</h6>
           </div>
-          <div onClick={removeHandle}>Remove</div>
+          <CloseCircleOutlined onClick={removeHandle} />
         </DescrTop>
         <span className='desc-price'>{price}&#8364;</span>
       </Description>

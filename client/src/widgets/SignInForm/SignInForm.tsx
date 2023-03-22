@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
+import { SignInFormWrapper } from '@widgets/SignInForm/SignInForm.styles';
 import { signInWithEmail, signInWithGooglePopup } from '@widgets/SignInForm/service/signin-service';
 
 interface SignInForm {
@@ -15,6 +16,7 @@ const SignInForm = () => {
       await signInWithGooglePopup();
       window.location.href = '/';
     } catch (e) {
+      alert('Something went wrong, please try again');
       console.error(e);
     }
   };
@@ -36,12 +38,13 @@ const SignInForm = () => {
   };
 
   return (
-    <div className='login-form'>
+    <SignInFormWrapper>
+      <h2>Sign In</h2>
       <Form
         name='normal_login'
-        className='login-form'
         initialValues={{ remember: true }}
         onFinish={onSubmit}
+        labelCol={{ span: 8, offset: 1 }}
         size='large'
       >
         <Form.Item
@@ -63,18 +66,13 @@ const SignInForm = () => {
           <Input type='password' placeholder='Password' />
         </Form.Item>
         <Form.Item>
-          <Form.Item name='remember' valuePropName='checked' noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-        </Form.Item>
-        <Form.Item>
           <Button type='primary' htmlType='submit' className='login-form-button'>
             Log in
           </Button>
           <Button onClick={signInByGoogle}>Sign in with Google</Button>
         </Form.Item>
       </Form>
-    </div>
+    </SignInFormWrapper>
   );
 };
 

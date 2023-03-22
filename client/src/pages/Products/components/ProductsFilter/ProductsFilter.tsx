@@ -86,8 +86,8 @@ const ProductsFilter = () => {
     if (minPrice && maxPrice) {
       setMinMaxPricesSlider([minPrice, maxPrice]);
       setSliderMarks({
-        [minPrice]: minPrice.toString(),
-        [maxPrice]: maxPrice.toString(),
+        [minPrice]: `${minPrice.toString()}\u20ac`,
+        [maxPrice]: `${maxPrice.toString()}\u20ac`,
       });
     }
   }, [filterStructure]);

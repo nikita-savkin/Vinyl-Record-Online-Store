@@ -11,8 +11,13 @@ export const ProductsPageWrapper = styled.div`
   display: flex;
 `;
 
+export const AllProducts = styled.div`
+  width: 80%;
+`;
+
 export const ProductsFilterWrapper = styled.div`
-  margin-right: 20px;
+  width: 20%;
+  margin-right: 40px;
 
   h3 {
     color: ${COLORS.red};
@@ -93,5 +98,19 @@ export const SortingSelectWrapper = styled.div`
       margin-right: 10px;
       color: ${COLORS.red};
     }
+  }
+`;
+
+export const ProductsListStatus = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 600;
+
+  .ant-spin-dot-item {
+    background-color: ${COLORS.red};
   }
 `;

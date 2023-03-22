@@ -1,4 +1,5 @@
 import { Button, Form, Input } from 'antd';
+import { SignUpFormWrapper } from '@widgets/SignUpForm/SignUpForm.styles';
 import { createAuthUserWithEmailAndPassword, createUserDoc } from '@widgets/SignUpForm/service/signup-service';
 
 interface SignUpForm {
@@ -15,21 +16,29 @@ const SignUpForm = () => {
     try {
       const createdUser = await createAuthUserWithEmailAndPassword(email, password);
       if (createdUser) await createUserDoc(createdUser.user, additionalInfo);
+      window.location.href = '/';
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
-          // TODO убрать все алерты
           alert('Email already in use');
         } else {
-          alert('Account is not created');
+          console.error(error);
         }
       }
     }
   };
 
   return (
-    <div className='signup-form'>
-      <Form name='register' onFinish={onRegister} scrollToFirstError>
+    <SignUpFormWrapper>
+      <h2>Sign Up</h2>
+      <Form
+        style={{ maxWidth: 420 }}
+        name='register'
+        onFinish={onRegister}
+        labelCol={{ span: 8, offset: 1, style: { width: 200 } }}
+        size='large'
+        scrollToFirstError
+      >
         <Form.Item
           name='userName'
           label='Nickname'
@@ -92,13 +101,11 @@ const SignUpForm = () => {
         >
           <Input.Password />
         </Form.Item>
-        <Form.Item>
-          <Button type='primary' htmlType='submit'>
-            Register
-          </Button>
-        </Form.Item>
+        <Button type='primary' htmlType='submit'>
+          Register
+        </Button>
       </Form>
-    </div>
+    </SignUpFormWrapper>
   );
 };
 

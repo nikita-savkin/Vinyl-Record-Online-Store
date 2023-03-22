@@ -23,7 +23,7 @@ export const Description = styled.div`
   flex-direction: column;
   flex: 1;
 
-  span {
+  > span {
     display: block;
     margin-top: auto;
   }
@@ -38,5 +38,10 @@ export const DescrTop = styled.div`
     display: block;
     font-weight: 600;
     font-size: 17px;
+  }
+
+  .anticon-close-circle {
+    width: 20px;
+    height: 20px;
   }
 `;

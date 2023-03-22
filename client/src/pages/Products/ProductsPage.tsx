@@ -1,11 +1,13 @@
 import ProductsFilter from '@pages/Products/components/ProductsFilter/ProductsFilter';
 import ProductPreview from '@shared/components/ProductPreview/ProductPreview';
 import {
+  AllProducts,
   ProductsPageWrapper,
   ProductsFilterWrapper,
   ProductsListWrapper,
   PaginationBlock,
   SortingSelectWrapper,
+  ProductsListStatus,
 } from '@pages/Products/ProductsPage.styles';
 import { useAppSelector, useAppDispatch } from '@shared/hooks/dispatch-selector';
 import { useEffect, useState } from 'react';
@@ -15,6 +17,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Pagination, Select } from 'antd';
 import { SORTING_OPTIONS } from '@pages/Products/constants';
 import qs from 'qs';
+import { Spin } from 'antd/lib';
 
 const ProductsPage = () => {
   const navigate = useNavigate();
@@ -28,14 +31,28 @@ const ProductsPage = () => {
   const [selectedSortingValue, setSelectedSortingValue] = useState(SORTING_OPTIONS[0]?.value ?? null);
 
   const ProductsListCondition = (): JSX.Element => {
-    if (fetchErrorMessage) return <div>Error</div>;
-    if (isProductsLoading) return <div>Loading</div>;
+    const fetchError = 'Something went wrong, please reload page';
+    const notFoundMessage = 'Nothing found, please change filters';
+
+    if (isProductsLoading)
+      return (
+        <>
+          <ProductsListStatus>
+            <Spin size='large' />
+          </ProductsListStatus>
+        </>
+      );
+
+    if (!allProducts?.length) return <ProductsListStatus>{fetchError}</ProductsListStatus>;
+    if (fetchErrorMessage) return <ProductsListStatus>{notFoundMessage}</ProductsListStatus>;
 
     return (
       <>
-        {allProducts?.map((product: ProductFull) => (
-          <ProductPreview product={product} key={product._id} />
-        ))}
+        <ProductsListWrapper>
+          {allProducts?.map((product: ProductFull) => (
+            <ProductPreview product={product} key={product._id} />
+          ))}
+        </ProductsListWrapper>
       </>
     );
   };
@@ -117,14 +134,18 @@ const ProductsPage = () => {
           <h3>Filters</h3>
           <ProductsFilter />
         </ProductsFilterWrapper>
-        <div>
-          <ProductsListWrapper>
-            <ProductsListCondition />
-          </ProductsListWrapper>
+        <AllProducts>
+          <ProductsListCondition />
           <PaginationBlock>
-            <Pagination current={currentPage} onChange={handlePageChange} total={totalPages} defaultPageSize={limit} />
+            <Pagination
+              hideOnSinglePage
+              current={currentPage}
+              onChange={handlePageChange}
+              total={totalPages}
+              defaultPageSize={limit}
+            />
           </PaginationBlock>
-        </div>
+        </AllProducts>
       </ProductsPageWrapper>
     </div>
   );
