@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "netlify-build": "tsc && vite build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
