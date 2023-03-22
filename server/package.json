@@ -6,6 +6,7 @@
   "main": "index.ts",
   "scripts": {
     "server-dev": "cross-env NODE_ENV=dev nodemon --watch './**/*.ts' --exec 'ts-node' --esm index.ts",
+    "server-prod": "cross-env NODE_ENV=prod nodemon --watch './**/*.ts' --exec 'ts-node' --esm index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
